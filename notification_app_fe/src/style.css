@@ -1,134 +1,130 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #f4f6f8;
-  color: #202124;
-}
-
-button {
-  cursor: pointer;
-  border: 1px solid #cfd6dd;
-  background: white;
-  border-radius: 6px;
-  padding: 9px 14px;
-  font-size: 14px;
-}
-
-button:hover,
-button.active {
-  background: #1f6feb;
-  color: white;
-  border-color: #1f6feb;
+  background-color: white;
+  color: black;
 }
 
 .top-bar {
-  background: white;
-  border-bottom: 1px solid #d8dee4;
-  padding: 18px 24px;
+  background-color: #eeeeee;
+  padding: 15px;
+  border-bottom: 2px solid black;
 }
 
 .top-bar h1 {
-  margin: 0 0 14px;
-  font-size: 28px;
+  margin: 0;
+  font-size: 30px;
 }
 
-.nav-buttons,
-.filter-row {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.nav-buttons {
+  margin-top: 15px;
+}
+
+button {
+  padding: 8px 12px;
+  margin-right: 8px;
+  border: 1px solid black;
+  background-color: lightgray;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #cccccc;
+}
+
+button.active {
+  background-color: yellow;
 }
 
 .page {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 24px;
+  padding: 20px;
 }
 
 .page h2 {
+  font-size: 24px;
   margin-top: 0;
+  text-decoration: underline;
+}
+
+.filter-row {
+  margin-bottom: 15px;
 }
 
 .list {
-  display: grid;
-  gap: 12px;
+  margin-top: 10px;
 }
 
 .card {
-  background: white;
-  border: 1px solid #d8dee4;
-  border-radius: 8px;
-  padding: 16px;
+  border: 2px solid #444444;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fafafa;
 }
 
 .card.unread {
-  border-left: 6px solid #1f6feb;
+  background-color: #e8f2ff;
 }
 
 .card.read {
-  opacity: 0.68;
+  background-color: #eeeeee;
+  color: #666666;
 }
 
 .card h3 {
-  margin: 12px 0 8px;
+  margin: 8px 0;
   font-size: 18px;
 }
 
 .card p {
-  margin: 0 0 12px;
-  color: #59636e;
+  margin: 5px 0 10px;
 }
 
 .badge {
   display: inline-block;
-  padding: 5px 10px;
-  border-radius: 14px;
-  font-size: 12px;
-  font-weight: bold;
-  background: #eaeef2;
+  border: 1px solid black;
+  padding: 3px 6px;
+  font-size: 13px;
+  background-color: white;
 }
 
 .badge.Placement {
-  background: #dff5e6;
-  color: #116329;
+  background-color: lightgreen;
 }
 
 .badge.Result {
-  background: #fff1cc;
-  color: #7d4e00;
+  background-color: khaki;
 }
 
 .badge.Event {
-  background: #e8f0ff;
-  color: #174ea6;
+  background-color: lightblue;
 }
 
 .unread-text {
   margin-left: 10px;
-  color: #1f6feb;
-  font-size: 13px;
+  color: red;
   font-weight: bold;
 }
 
 .small-button {
-  padding: 7px 11px;
+  padding: 5px 8px;
+  font-size: 13px;
 }
 
 .top-input {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 18px;
+  display: block;
+  margin-bottom: 15px;
 }
 
 .top-input input {
-  width: 70px;
-  padding: 8px;
-  border: 1px solid #cfd6dd;
-  border-radius: 6px;
+  margin-left: 8px;
+  padding: 5px;
+  width: 60px;
 }
 
 .error {
-  color: #b42318;
+  color: red;
   font-weight: bold;
+  font-size: 18px;
 }
