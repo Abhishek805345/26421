@@ -1,0 +1,134 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #202124;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid #cfd6dd;
+  background: white;
+  border-radius: 6px;
+  padding: 9px 14px;
+  font-size: 14px;
+}
+
+button:hover,
+button.active {
+  background: #1f6feb;
+  color: white;
+  border-color: #1f6feb;
+}
+
+.top-bar {
+  background: white;
+  border-bottom: 1px solid #d8dee4;
+  padding: 18px 24px;
+}
+
+.top-bar h1 {
+  margin: 0 0 14px;
+  font-size: 28px;
+}
+
+.nav-buttons,
+.filter-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.page h2 {
+  margin-top: 0;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+}
+
+.card {
+  background: white;
+  border: 1px solid #d8dee4;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.card.unread {
+  border-left: 6px solid #1f6feb;
+}
+
+.card.read {
+  opacity: 0.68;
+}
+
+.card h3 {
+  margin: 12px 0 8px;
+  font-size: 18px;
+}
+
+.card p {
+  margin: 0 0 12px;
+  color: #59636e;
+}
+
+.badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 14px;
+  font-size: 12px;
+  font-weight: bold;
+  background: #eaeef2;
+}
+
+.badge.Placement {
+  background: #dff5e6;
+  color: #116329;
+}
+
+.badge.Result {
+  background: #fff1cc;
+  color: #7d4e00;
+}
+
+.badge.Event {
+  background: #e8f0ff;
+  color: #174ea6;
+}
+
+.unread-text {
+  margin-left: 10px;
+  color: #1f6feb;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.small-button {
+  padding: 7px 11px;
+}
+
+.top-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+.top-input input {
+  width: 70px;
+  padding: 8px;
+  border: 1px solid #cfd6dd;
+  border-radius: 6px;
+}
+
+.error {
+  color: #b42318;
+  font-weight: bold;
+}
