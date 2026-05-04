@@ -1,6 +1,7 @@
 const fetchNotifications = require("./fetch");
 const sortNotifications = require("./utils");
-const Log = require("./log");
+const logFile = require("./log");
+const Log = logFile.Log;
 
 async function main() {
   try {

@@ -1,4 +1,21 @@
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJhYmhpc2hlay4yNjQyMUBnZ25pbmRhLmRyb25hY2hhcnlhLmluZm8iLCJleHAiOjE3Nzc4NzI3MTksImlhdCI6MTc3Nzg3MTgxOSwiaXNzIjoiQWZmb3JkIE1lZGljYWwgVGVjaG5vbG9naWVzIFByaXZhdGUgTGltaXRlZCIsImp0aSI6ImI5ODNlM2I1LTNlYjAtNDZiNy05NGE4LTE1YTMwNmM0YjlmMSIsImxvY2FsZSI6ImVuLUlOIiwibmFtZSI6ImFiaGlzaGVrIiwic3ViIjoiZTE3YjM3ZmUtZTVkNS00ZGM0LTk2YjMtODNiN2E5MjYxN2NmIn0sImVtYWlsIjoiYWJoaXNoZWsuMjY0MjFAZ2duaW5kYS5kcm9uYWNoYXJ5YS5pbmZvIiwibmFtZSI6ImFiaGlzaGVrIiwicm9sbE5vIjoiMjY0MjEiLCJhY2Nlc3NDb2RlIjoidWtzZFdUIiwiY2xpZW50SUQiOiJlMTdiMzdmZS1lNWQ1LTRkYzQtOTZiMy04M2I3YTkyNjE3Y2YiLCJjbGllbnRTZWNyZXQiOiJkamZNWllSVmd1V0tOQ2NWIn0.hQW9vlNMLKjtnPzgf0Kwe061dFB6UzMtRwWWpURmDGs";
+const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJhYmhpc2hlay4yNjQyMUBnZ25pbmRhLmRyb25hY2hhcnlhLmluZm8iLCJleHAiOjE3Nzc4NzY0MzMsImlhdCI6MTc3Nzg3NTUzMywiaXNzIjoiQWZmb3JkIE1lZGljYWwgVGVjaG5vbG9naWVzIFByaXZhdGUgTGltaXRlZCIsImp0aSI6IjlmMjQxMzJjLWRhZTctNGEyNi05YjM5LTU4MWMyZTZlZWU0OSIsImxvY2FsZSI6ImVuLUlOIiwibmFtZSI6ImFiaGlzaGVrIiwic3ViIjoiZTE3YjM3ZmUtZTVkNS00ZGM0LTk2YjMtODNiN2E5MjYxN2NmIn0sImVtYWlsIjoiYWJoaXNoZWsuMjY0MjFAZ2duaW5kYS5kcm9uYWNoYXJ5YS5pbmZvIiwibmFtZSI6ImFiaGlzaGVrIiwicm9sbE5vIjoiMjY0MjEiLCJhY2Nlc3NDb2RlIjoidWtzZFdUIiwiY2xpZW50SUQiOiJlMTdiMzdmZS1lNWQ1LTRkYzQtOTZiMy04M2I3YTkyNjE3Y2YiLCJjbGllbnRTZWNyZXQiOiJkamZNWllSVmd1V0tOQ2NWIn0.pbfsfdPZaWVp5FSzzMsej1TDB8peKOb3RKliOST2QR4";
+
+function isTokenExpired() {
+  try {
+    const tokenParts = token.split(".");
+    const tokenData = JSON.parse(Buffer.from(tokenParts[1], "base64url").toString());
+    const expiryTime = tokenData.MapClaims.exp * 1000;
+    const currentTime = Date.now();
+
+    if (currentTime > expiryTime) {
+      return true;
+    }
+
+    return false;
+  } catch (error) {
+    return true;
+  }
+}
 
 async function Log(stack, level, package, message) {
   try {
@@ -21,6 +38,11 @@ async function Log(stack, level, package, message) {
       return;
     }
 
+    if (isTokenExpired()) {
+      console.log("Token expired. Please add a new access token in log.js");
+      return;
+    }
+
     const response = await fetch("http://20.207.122.201/evaluation-service/logs", {
       method: "POST",
       headers: {
@@ -35,9 +57,9 @@ async function Log(stack, level, package, message) {
       })
     });
 
-    console.log("Log sent:", message);
-
-    if (!response.ok) {
+    if (response.ok) {
+      console.log("Log sent:", message);
+    } else {
       console.log("Log API problem:", response.status);
     }
   } catch (error) {
@@ -45,4 +67,8 @@ async function Log(stack, level, package, message) {
   }
 }
 
-module.exports = Log;
+module.exports = {
+  Log: Log,
+  token: token,
+  isTokenExpired: isTokenExpired
+};

@@ -1,4 +1,7 @@
-const Log = require("./log");
+const logFile = require("./log");
+const Log = logFile.Log;
+const token = logFile.token;
+const isTokenExpired = logFile.isTokenExpired;
 
 const apiUrl = "http://20.207.122.201/evaluation-service/notifications";
 
@@ -6,7 +9,15 @@ async function fetchNotifications() {
   console.log("Going to fetch notifications...");
   await Log("frontend", "info", "api", "Before fetching API");
 
-  const response = await fetch(apiUrl);
+  if (isTokenExpired()) {
+    throw new Error("Token expired. Please add a new access token in log.js");
+  }
+
+  const response = await fetch(apiUrl, {
+    headers: {
+      "Authorization": "Bearer " + token
+    }
+  });
 
   if (!response.ok) {
     await Log("frontend", "error", "api", "API fetch failed");

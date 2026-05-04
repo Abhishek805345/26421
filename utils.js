@@ -16,15 +16,20 @@ function getPriorityValue(type) {
 
 function sortNotifications(notifications) {
   notifications.sort(function (a, b) {
-    const firstPriority = getPriorityValue(a.type);
-    const secondPriority = getPriorityValue(b.type);
+    const firstType = a.Type || a.type;
+    const secondType = b.Type || b.type;
+    const firstTimestamp = a.Timestamp || a.timestamp;
+    const secondTimestamp = b.Timestamp || b.timestamp;
+
+    const firstPriority = getPriorityValue(firstType);
+    const secondPriority = getPriorityValue(secondType);
 
     if (firstPriority !== secondPriority) {
       return secondPriority - firstPriority;
     }
 
-    const firstTime = new Date(a.timestamp).getTime();
-    const secondTime = new Date(b.timestamp).getTime();
+    const firstTime = new Date(firstTimestamp).getTime();
+    const secondTime = new Date(secondTimestamp).getTime();
 
     return secondTime - firstTime;
   });
